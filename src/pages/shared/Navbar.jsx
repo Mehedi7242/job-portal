@@ -1,37 +1,54 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import AuthContext from '../../context/AuthContext/AuthContext';
+import Swal from 'sweetalert2'
 const Navbar = () => {
-    const links = <>
-        <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-            <li><NavLink to={"/"}>Home</NavLink></li>
-            <li>
-            <a>Parent</a>
-            <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-            </ul>
-            </li>
-            <li><a>Item 3</a></li>
-        </ul>
-    </>
-    const links2 =<>
-        <ul className="menu menu-horizontal px-1">
-                <li><NavLink to={"/"}>Home</NavLink></li>
-                <li>
-                    <details>
-                    <summary>Parent</summary>
-                    <ul className="p-2">
-                        <li><a>Submenu 1</a></li>
-                        <li><a>Submenu 2</a></li>
-                    </ul>
-                    </details>
-                </li>
-                <li><a>Item 3</a></li>
-        </ul>
-        </>
+  const {user,signOutUser} = useContext(AuthContext)
+  const handleLogOut = ()=>{
+    signOutUser()
+      .then(()=>{
+        Swal.fire({
+          title: "successfully logged out",
+          text: "bye",
+          icon: "success"
+        });
+      })
+  }
+  const links = <>
+      <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          <li><NavLink to={"/"}>Home</NavLink></li>
+          <li>
+          <a>Parent</a>
+          <ul className="p-2">
+              <li><a>Submenu 1</a></li>
+              <li><a>Submenu 2</a></li>
+          </ul>
+          </li>
+          <li><a>Item 3</a></li>
+          
+      </ul>
+  </>
+  const links2 =<>
+      <ul className="menu menu-horizontal px-1">
+              <li><NavLink to={"/"}>Home</NavLink></li>
+              <li>
+                  <details>
+                  <summary>Parent</summary>
+                  <ul className="p-2">
+                      <li><a>Submenu 1</a></li>
+                      <li><a>Submenu 2</a></li>
+                  </ul>
+                  </details>
+              </li>
+              <li><a>Item 3</a></li>
+      </ul>
+      </>
+
+    
+
+
     return (
         <div className="navbar bg-base-100">
   <div className="navbar-start">
@@ -58,8 +75,24 @@ const Navbar = () => {
     {links2}
   </div>
   <div className="navbar-end gap-2">
-    <NavLink to={'/register'} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Register</NavLink>
-    <NavLink className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Sign In</NavLink>
+
+    {
+      user ?
+      <>
+        <NavLink onClick={handleLogOut} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Log Out</NavLink>
+        <div className="avatar">
+          <div className="ring-primary ring-offset-base-100 w-6 md:w-8 lg:w-12 rounded-full ring ring-offset-2">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+          </div>
+        </div>
+      </>
+      : 
+      <>
+        <NavLink to={'/register'} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Register</NavLink>
+        <NavLink to={'/signIn'} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Sign In</NavLink>
+      </> 
+      
+    }
   </div>
 </div>
     );
