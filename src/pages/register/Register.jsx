@@ -2,8 +2,12 @@ import Lottie from 'lottie-react';
 import React, { useContext } from 'react';
 import regsiterLottieData from '../../assets/lottie/register.json'
 import AuthContext from '../../context/AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import GoogleBtn from '../shared/googleBtn.Jsx';
+
 const Register = () => {
     const {createUser} = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleRegiter = e =>{
         e.preventDefault()
         const form = e.target;
@@ -11,7 +15,11 @@ const Register = () => {
         const password = form.email.value;
         console.log(email,password)
         createUser(email,password)
-            .then(result=>console.log(result.user))
+            .then(result=>{
+                console.log(result.user)
+                navigate('/')
+
+            })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message
@@ -46,6 +54,9 @@ const Register = () => {
                     <button className="btn btn-primary">Register</button>
                     </div>
                 </form>
+                <div className='mx-auto p-2'>
+                    <GoogleBtn pageInfo = {{ButtonDetails:'register with Google'}} ></GoogleBtn>
+                </div>
                 </div>
             </div>
         </div>

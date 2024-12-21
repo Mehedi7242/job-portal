@@ -13,8 +13,10 @@ const Navbar = () => {
           icon: "success"
         });
       })
+      .catch(error=>console.log("log out failed"))
   }
-  const links = <>
+  const links = 
+    <>
       <ul
           tabIndex={0}
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
@@ -27,10 +29,10 @@ const Navbar = () => {
           </ul>
           </li>
           <li><a>Item 3</a></li>
-          
       </ul>
-  </>
-  const links2 =<>
+    </>
+  const links2 =
+    <>
       <ul className="menu menu-horizontal px-1">
               <li><NavLink to={"/"}>Home</NavLink></li>
               <li>
@@ -44,11 +46,7 @@ const Navbar = () => {
               </li>
               <li><a>Item 3</a></li>
       </ul>
-      </>
-
-    
-
-
+    </>
     return (
         <div className="navbar bg-base-100">
   <div className="navbar-start">
@@ -74,7 +72,7 @@ const Navbar = () => {
   <div className="navbar-center hidden lg:flex">
     {links2}
   </div>
-  <div className="navbar-end gap-2">
+  <div className=" w-1/2 justify-center  gap-2">
 
     {
       user ?

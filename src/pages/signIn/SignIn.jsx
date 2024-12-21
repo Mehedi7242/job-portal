@@ -1,12 +1,15 @@
 import Lottie from 'lottie-react';
 import React, { useContext } from 'react';
-import regsiterLottieData from '../../assets/lottie/register.json'
+import loginLottieData from '../../assets/lottie/login.json'
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import GoogleBtn from '../shared/googleBtn.Jsx';
+
 const SignIn = () => {
     const navigate = useNavigate()
     const {signInUser} = useContext(AuthContext)
+    
     const handleSignIn = e =>{
         e.preventDefault()
         const form = e.target;
@@ -37,7 +40,7 @@ const SignIn = () => {
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className=" mx-auto lg:text-left w-96">
-                    <Lottie animationData={regsiterLottieData}></Lottie>
+                    <Lottie animationData={loginLottieData}></Lottie>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <form onSubmit={handleSignIn} className="card-body">
@@ -60,6 +63,9 @@ const SignIn = () => {
                     <button className="btn btn-primary">Sign in</button>
                     </div>
                 </form>
+                <div className='mx-auto p-2'>
+                    <GoogleBtn></GoogleBtn>
+                </div>
                 </div>
             </div>
         </div>
