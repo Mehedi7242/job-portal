@@ -2,14 +2,14 @@ import Lottie from 'lottie-react';
 import React, { useContext } from 'react';
 import loginLottieData from '../../assets/lottie/login.json'
 import AuthContext from '../../context/AuthContext/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import GoogleBtn from '../shared/googleBtn.Jsx';
-
+import { easeInOut, motion } from "motion/react"
 const SignIn = () => {
     const navigate = useNavigate()
     const {signInUser} = useContext(AuthContext)
-    
+    const location = useLocation()
     const handleSignIn = e =>{
         e.preventDefault()
         const form = e.target;
@@ -26,7 +26,8 @@ const SignIn = () => {
                     confirmButtonText: 'Go to Home',
                     timer: 2000, 
                 }).then(()=>{
-                    navigate('/')
+                    navigate(`${location.state||"/"}`)
+                    console.log(location.pathname)
                 }) 
         })
             .catch((error) => {
@@ -39,9 +40,12 @@ const SignIn = () => {
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className=" mx-auto lg:text-left w-96">
-                    <Lottie animationData={loginLottieData}></Lottie>
-                </div>
+                <motion.div 
+                    animate={{x:[0,50,0]}}
+                    transition={{ease:easeInOut, repeat:Infinity,duration:3}}
+                    className=" mx-auto lg:text-left w-96">
+                        <Lottie animationData={loginLottieData}></Lottie>
+                </motion.div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <form onSubmit={handleSignIn} className="card-body">
                     <div className="form-control">
