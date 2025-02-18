@@ -22,13 +22,13 @@ const Navbar = () => {
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
           <li><NavLink to={"/"}>Home</NavLink></li>
           <li>
-          <a>Parent</a>
+          <a>Application</a>
           <ul className="p-2">
-              <li><NavLink to={"/myApplication"}>MyApplications</NavLink></li>
-              <li><a>Submenu 2</a></li>
+              <li><NavLink to={"/myApplication"}>My Applications</NavLink></li>
+              <li><a>My Posted Jobs</a></li>
           </ul>
           </li>
-          <li><a>Item 3</a></li>
+          <li><a>Add a Jobs</a></li>
       </ul>
     </>
   const links2 =
@@ -37,10 +37,10 @@ const Navbar = () => {
               <li><NavLink to={"/"}>Home</NavLink></li>
               <li>
                   <details>
-                  <summary>Parent</summary>
+                  <summary>Application</summary>
                   <ul className="p-2">
-                      <li><a>Submenu 1</a></li>
-                      <li><a>Submenu 2</a></li>
+                      <li><NavLink to={'/myApplication'}>My Application</NavLink></li>
+                      <li><a>My Posted Jobs</a></li>
                   </ul>
                   </details>
               </li>
@@ -67,7 +67,7 @@ const Navbar = () => {
       </div>
       {links}
     </div>
-    <a className="btn btn-ghost text-xl">Job Portal</a>
+    <NavLink to={"/"} className="btn btn-ghost text-xl">Job Portal</NavLink>
   </div>
   <div className="navbar-center hidden lg:flex">
     {links2}
