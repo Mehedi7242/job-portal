@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import GoogleBtn from '../shared/googleBtn.Jsx';
 import { easeInOut, motion } from "motion/react"
+import axios from 'axios';
 const SignIn = () => {
     const navigate = useNavigate()
     const {signInUser} = useContext(AuthContext)
@@ -15,10 +16,18 @@ const SignIn = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.email.value;
-        console.log(email,password)
+        // console.log(email,password)
         signInUser(email,password)
             .then(result=>{
                 console.log(result.user)
+                const user = {email:email}
+                axios.post('http://localhost:3000/jwt',user,{
+                    withCredentials:true
+                })
+                    .then(res=>{
+                    console.log(res.data)
+                })
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Successful',

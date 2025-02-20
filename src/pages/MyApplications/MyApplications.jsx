@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const MyApplications = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/job-application?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setJobs(data));
-    }, [user?.email]);
+        // fetch(`http://localhost:3000/job-application?email=${user?.email}`)
+        //     .then(res => res.json())
+        //     .then(data => setJobs(data));
+        axios.get(`http://localhost:3000/job-application?email=${user?.email}`,
+         {withCredentials:true})
+            .then(res => setJobs(res.data));
+
+    
+        }, [user?.email]);
+    
 
     const today = new Date(); // Get current date
 
